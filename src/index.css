@@ -2,41 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* SmartPlum Design System - Professional Plumbing Service
+All colors MUST be HSL. Semantic tokens for consistent branding.
 */
 
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 215 25% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 215 25% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 215 25% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* SmartPlum Brand Colors */
+    --primary: 213 94% 37%; /* Deep plumber blue */
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 213 94% 32%;
+    
+    --secondary: 213 23% 94%; /* Light blue */
+    --secondary-foreground: 215 25% 15%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --accent: 22 93% 53%; /* Orange accent for CTAs */
+    --accent-foreground: 0 0% 100%;
+    --accent-hover: 22 93% 48%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 213 94% 37%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --radius: 0.75rem;
 
-    --radius: 0.5rem;
+    /* SmartPlum Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(213 94% 37%) 0%, hsl(213 84% 25%) 100%);
+    --gradient-service: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(213 23% 98%) 100%);
+    --gradient-cta: linear-gradient(135deg, hsl(22 93% 53%) 0%, hsl(22 93% 48%) 100%);
+
+    /* Shadows */
+    --shadow-soft: 0 4px 6px -1px hsl(215 25% 15% / 0.1);
+    --shadow-medium: 0 10px 15px -3px hsl(215 25% 15% / 0.1);
+    --shadow-large: 0 25px 50px -12px hsl(215 25% 15% / 0.25);
+    --shadow-glow: 0 0 40px hsl(213 94% 37% / 0.3);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +118,102 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+    scroll-behavior: smooth;
+  }
+
+  /* SmartPlum Custom Components */
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+
+  .service-gradient {
+    background: var(--gradient-service);
+  }
+
+  .cta-gradient {
+    background: var(--gradient-cta);
+  }
+
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .shadow-medium {
+    box-shadow: var(--shadow-medium);
+  }
+
+  .shadow-large {
+    box-shadow: var(--shadow-large);
+  }
+
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  .transition-bounce {
+    transition: var(--transition-bounce);
+  }
+
+  /* Hover scale animation for cards/buttons */
+  .hover-scale {
+    transition: var(--transition-smooth);
+  }
+
+  .hover-scale:hover {
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  /* Smooth reveal animation */
+  .reveal-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: revealUp 0.8s ease-out forwards;
+  }
+
+  @keyframes revealUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Stagger animation delays */
+  .reveal-delay-1 { animation-delay: 0.1s; }
+  .reveal-delay-2 { animation-delay: 0.2s; }
+  .reveal-delay-3 { animation-delay: 0.3s; }
+}
+
+@layer components {
+  /* Hero Button Variants */
+  .btn-hero {
+    @apply bg-gradient-to-r from-accent to-accent-hover text-accent-foreground px-8 py-4 rounded-xl font-semibold text-lg shadow-medium hover:shadow-large transition-smooth hover:scale-105;
+  }
+
+  .btn-secondary {
+    @apply bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium shadow-soft hover:bg-primary-hover transition-smooth;
+  }
+
+  .btn-outline {
+    @apply border-2 border-primary text-primary px-6 py-3 rounded-lg font-medium hover:bg-primary hover:text-primary-foreground transition-smooth;
+  }
+
+  /* Service Card */
+  .service-card {
+    @apply bg-white rounded-xl p-6 shadow-soft hover:shadow-medium transition-smooth hover-scale;
+  }
+
+  /* Section padding */
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+
+  /* Container */
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 }
