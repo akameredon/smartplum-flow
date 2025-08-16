@@ -15,6 +15,12 @@ import AboutUs from "./pages/AboutUs";
 import Blog from "./pages/Blog";
 import FAQ from "./pages/FAQ";
 import ServiceAreas from "./pages/ServiceAreas";
+import PricingCalculator from "./pages/PricingCalculator";
+import BusinessDashboard from "./pages/BusinessDashboard";
+import CustomerPortal from "./pages/CustomerPortal";
+import MaintenanceScheduler from "./pages/MaintenanceScheduler";
+import ServiceGuides from "./pages/ServiceGuides";
+import PhotoGallery from "./pages/PhotoGallery";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +42,12 @@ const App = () => (
           <Route path="/blog" element={<Blog />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/service-areas" element={<ServiceAreas />} />
+          <Route path="/pricing-calculator" element={<PricingCalculator />} />
+          <Route path="/business-dashboard" element={<BusinessDashboard />} />
+          <Route path="/customer-portal" element={<CustomerPortal />} />
+          <Route path="/maintenance-scheduler" element={<MaintenanceScheduler />} />
+          <Route path="/service-guides" element={<ServiceGuides />} />
+          <Route path="/photo-gallery" element={<PhotoGallery />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
